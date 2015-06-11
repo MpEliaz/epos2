@@ -1,0 +1,64 @@
+body{
+
+/*    background-color: #bdc3c7 !important; */
+}
+#prepay{
+    height: 70px;
+}
+.stock-bajo-table{
+    background-color: rgba(255, 0, 0, 0.35);
+}
+
+.total-venta{
+    padding: 10px 0;
+    border: 1px solid #dddddd;
+    background-color: #f5f5f5;
+}
+.cant_prod{
+    width: 60px;
+}
+.hiddenRow {
+    padding: 0 !important;
+}
+.tabla_ventas{
+    /*background-color: #A6BEA4 !important;*/
+
+}
+.venta_detalle_table{
+    background-color: #DFDADA !important;
+    margin-bottom: 0px !important;
+}
+.tipo_pago{
+    margin-right: 10px;
+}
+
+.input_warning{
+    background-color: #FFE5E5;
+    border-color: #F00;
+}
+
+.oculto{
+    display: none;
+}
+
+/*------------ edit -------------*/
+/*.navbar-default {
+    background-color: #27ae60;
+    border-color: #27ae60;
+}
+
+.nav.navbar-nav li a {
+    color: white;
+}
+.dropdown-menu{
+    background-color: #5E5E5E;
+}
+.panel{
+    border: 0px !important;
+}
+.panel-default > .panel-heading {
+    color: #333333 !important;
+    background-color: #3498db !important;
+    border-color: #FFF !important;
+}*/
+/*------------ edit -------------*/
