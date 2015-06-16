@@ -141,8 +141,8 @@ class ProductosController extends Controller {
 
             $producto = Producto::findOrFail($id);
             $producto->estado = true;
-            $producto->save();
-            return Response::json($producto);
+            $status = $producto->save();
+            return Response::json($status);
         }
         return false;
     }
@@ -155,8 +155,8 @@ class ProductosController extends Controller {
 
             $producto = Producto::findOrFail($id);
             $producto->estado = false;
-            $producto->save();
-            return Response::json($producto);
+            $status = $producto->save();
+            return Response::json($status);
         }
         return false;
     }

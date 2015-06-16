@@ -176,22 +176,21 @@ angular.module("ventasApp", ['ui.bootstrap', 'LocalStorageModule'])
                 $scope.valorTotal = manejadorVenta.getValorTotal();
             }
         };
-        /*        $scope.cerrarVenta = function () {
-         productos = manejadorVenta.cerrarVenta();
-         $http.post('http://localhost:8000/send/', {
-         params: productos
-         }).success(function(response){
-         console.log(response);
-         });
-         };*/
+
         $scope.buscarDescuento = function () {
             val = $scope.desc_seach;
             return $http.post('/desc_/', {
                 cod_desc : val
             }).success(function(response){
                 console.log(response);
-                $scope.descuentos = manejadorVenta.agregarDescuento(response);
-                $scope.valorTotal = manejadorVenta.updateTotal();
+                if(response.length > 0){
+                    $scope.descuentos = manejadorVenta.agregarDescuento(response);
+                    $scope.valorTotal = manejadorVenta.updateTotal();
+                }
+                else{
+                    console.log("no hay descuentos");
+                }
+
             });
         };
         $scope.clearDesc = function () {

@@ -1,9 +1,8 @@
 <?php namespace Epos\Http\Controllers;
 
 use Epos\Http\Requests;
-use Epos\Http\Controllers\Controller;
-
-use Illuminate\Http\Request;
+use Epos\Http\Requests\CreateMarcaRequest;
+use Epos\Models\Marca;
 
 class MarcaController extends Controller {
 
@@ -14,7 +13,8 @@ class MarcaController extends Controller {
 	 */
 	public function index()
 	{
-		//
+		$marcas = Marca::paginate();
+        return view('marcas.index',compact('marcas'));
 	}
 
 	/**
@@ -24,7 +24,7 @@ class MarcaController extends Controller {
 	 */
 	public function create()
 	{
-		//
+        return view('marcas.nuevo');
 	}
 
 	/**
@@ -32,9 +32,11 @@ class MarcaController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(CreateMarcaRequest $request)
 	{
-		//
+        $marca = Marca::create($request->all());
+        return redirect()->route('marcas.index');
+        //return dd($producto);
 	}
 
 	/**

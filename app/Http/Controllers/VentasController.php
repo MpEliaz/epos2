@@ -1,6 +1,7 @@
 <?php namespace Epos\Http\Controllers;
 
 use Carbon\Carbon;
+use Epos\Models\Producto;
 use Epos\Models\Venta;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
@@ -15,11 +16,16 @@ class VentasController extends Controller {
         $this->middleware('auth');
     }
 
-    public function showVentas()
+    public function showVentas(\Illuminate\Http\Request $request)
     {
-        $ventas = Venta::with('productos')->get();
-
-        return view('ventas.all', compact('ventas'));
+        $q = $request->get('por');
+        $ventas = Venta::with('productos')->por($q)->get();
+        $cant = 0;
+        foreach ($ventas as $v)
+        {
+            $cant +=$v->total_venta;
+        }
+        return view('ventas.all', compact('ventas','cant'));
         //return Response::json($ventas);
     }
 
@@ -60,7 +66,7 @@ class VentasController extends Controller {
             'nro_venta' 	=> 0,
             'fecha_venta' => Carbon::now(),
             'tipo_pago' => $tipo_pago,
-            'estado_venta' => 'finalizado',
+            //'estado_venta' => 'finalizado',
             'total_venta' => $total_venta,
             'id_vendedor' => Auth::user()->id,
             'id_cliente' => null
@@ -75,14 +81,34 @@ class VentasController extends Controller {
 
         if($venta != null)
         {
+            $prod_check = true;
             foreach($productos as $p){
+
+                $prod = Producto::findOrFail($p['id']);
                 $venta->productos()->attach($p['id'], ['cantidad'=>$p['cant_venta']]);
+
+                if($prod->stock >= $p['cant_venta'])
+                {
+
+                    $prod->stock = $prod->stock - $p['cant_venta'];
+                    $prod->save();
+                }
+                else{
+                    $prod_check = false;
+                }
 
             }
 
             if($paga_con>$total_venta){$vuelto = $paga_con-$total_venta;}
 
-            return Response::json(['id_venta'=>$venta->id,'vuelto'=>$vuelto, 'estado'=>'OK']);
+            if($prod_check){
+                $venta['estado_venta'] = 'finalizado';
+                $venta->save();
+                return Response::json(['id_venta'=>$venta->id,'vuelto'=>$vuelto, 'estado'=>'OK']);
+            }
+            else{
+                return Response::json(['estado'=>'No']);
+            }
         }
         else{
             return Response::json(['estado'=>'No']);

@@ -1,30 +1,33 @@
 
-function activar_producto($id)
+function activar_producto(x)
 {
     $.ajax({
         method: "POST",
         url: "/productos/activar",
         headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-        data: { id: $id }
+        data: { id: x.dataset.id }
     })
         .success(function( msg ) {
             console.log(msg);
-            location.reload();
+            if(msg == true){
+                this.attr('onclick','desactivar_producto('+ x.dataset.id+')');
+                this.cdd
+            }
         });
 
 }
 
-function desactivar_producto($id)
+function desactivar_producto(x)
 {
     $.ajax({
         method: "POST",
         url: "/productos/desactivar",
         headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-        data: { id: $id }
+        data: { id: x.dataset.id }
     })
         .success(function( msg ) {
             console.log(msg);
-            location.reload();
+            
         });
 
 }
@@ -82,27 +85,4 @@ $("#margen").keyup(function(){
 
 });
 
-$('.alerta').hide(4000);
-
-/*$("#precio_neto").keyup(function(){
-
-    margen = parseInt($("#precio_neto").val())-parseInt($("#precio_costo").val());
-    margen = margen*100/parseInt($("#precio_costo").val())
-    if(margen!=0 && !isNaN(margen) && margen!="")
-    {
-        $("#margen").val(margen);
-    }
-
-});
-
-$("#precio_neto").change(function(){
-
-    venta = parseInt($("#precio_neto").val()*1.19);
-
-    if(venta!=0 && !isNaN(venta) && venta!="")
-    {
-        $("#precio_venta").val(venta);
-    }
-
-});*/
-
+$('.alerta').fadeOut(3000);

@@ -76,7 +76,7 @@
                         </ul>
                     </div>
                 </div>
-                <button id="prepay" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#paymodal" tabindex="2">PAGAR</button>
+                <button id="prepay" class="btn btn-success btn-lg btn-block" ng-disabled="productos.length == 0" data-toggle="modal" data-target="#paymodal" tabindex="2">PAGAR</button>
                 <button class="btn btn-danger btn-lg btn-block" ng-click="clearAll()">LIMPIAR</button>
             </div>
         </div>

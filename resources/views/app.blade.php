@@ -49,7 +49,7 @@
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{url('/productos')}}">Productos</a></li>
                             <li><a href="{{url('/descuentos')}}">Descuentos</a></li>
-                            <li><a href="#">Marcas</a></li>
+                            <li><a href="{{url('/marcas')}}">Marcas</a></li>
                         </ul>
                     </li>
 				</ul>

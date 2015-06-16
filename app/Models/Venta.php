@@ -4,6 +4,7 @@
 use Carbon\Carbon;
 use Epos\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Venta extends Model{
 
@@ -23,6 +24,25 @@ class Venta extends Model{
 
     public function fecha_para_humanos()
     {
-        return Carbon::parse($this->fecha_venta)->format('d/m/Y - H:m');
+        return Carbon::parse($this->fecha_venta)->format('d/m/Y - H:i');
     }
+
+    public function scopePor($query, $q)
+    {
+        if($q != "" || $q != null)
+        {
+            switch($q){
+                case 'dia':
+                    $query->where(DB::raw('day(fecha_venta)'),'=',Carbon::today()->format('d'));
+                    break;
+                case 'semana':
+                    $query->whereBetween(DB::raw('date(fecha_venta)'),[Carbon::now()->startOfWeek(),Carbon::now()->endOfWeek()]);
+                    break;
+                case 'mes':
+                    $query->where(DB::raw('month(fecha_venta)'),'=',Carbon::today()->format('m'));
+                    break;
+            }
+        }
+    }
+
 }

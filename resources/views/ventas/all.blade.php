@@ -4,6 +4,12 @@
     <div class="panel panel-default">
         <div class="panel-heading"><strong>Detalle productos</strong></div>
         <div class="panel-body">
+            <p class="text-right">Hay <strong>{!!$ventas->count()!!}</strong> ventas realizadas</p>
+            <span><strong>Filtra por:</strong></span>
+            <a href="{{url('all_ventas?por=dia')}}" class="btn btn-primary">Dia</a>
+            <a href="{{url('all_ventas?por=semana')}}" class="btn btn-warning">Semana</a>
+            <a href="{{url('all_ventas?por=mes')}}" class="btn btn-danger">Mes</a>
+            <a href="{{url('all_ventas')}}" class="btn btn-success">Todos</a>
             <table class="table table-condensed tabla_ventas" style="border-collapse:collapse;">
                 <thead>
                 <tr>
@@ -25,8 +31,8 @@
                         <td>{{$v->tipo_pago}}</td>
                         <td>{{$v->estado_venta}}</td>
                         <td>1000</td>
-                        <td>{{$v->total_venta}}</td>
-                    <tr >
+                        <td>{{'$ '.number_format($v->total_venta,0)}}</td>
+                    <tr>
                         <td colspan="7" class="hiddenRow">
                             <div class="accordian-body collapse" id="row{{$v->id}}">
                                 <table class="table venta_detalle_table">
@@ -45,7 +51,7 @@
                                             <td width="20%">{{$p->modelo}}</td>
                                             <td width="40%">{{$p->descripcion_corta}}</td>
                                             <td width="5%">{{$p->pivot->cantidad}}</td>
-                                            <td width="15%">{{$p->precio_venta}}</td>
+                                            <td width="15%">{{'$ '.number_format($p->precio_venta)}}</td>
                                         </tr>
                                     @endforeach
                                 </table>
@@ -54,6 +60,7 @@
                     </tr>
                 @endforeach
             </table>
+            <p><h4 class="text-right">TOTAL: {{'$ '.number_format($cant,0)}}</h4></p>
         </div>
     </div>
 </div>

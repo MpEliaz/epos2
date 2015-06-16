@@ -44,9 +44,9 @@
 	    			<td>{{$producto->precio_neto}}</td>
 	    			<td>{{$producto->precio_venta}}</td>
 	    			<td>{{$producto->stock}}</td>
-	    			<td> @if($producto->estado === 1)<button onclick="desactivar_producto({{$producto->id}})" class="btn btn-danger">Desactivar</button>
+	    			<td> @if($producto->estado === 1)<button onclick="desactivar_producto(this)" data-id="{{$producto->id}}" class="btn btn-danger">Desactivar</button>
                         @elseif ($producto->estado === 0)
-                            <button onclick="activar_producto({{$producto->id}})" class="btn btn-success">Activar</button>
+                            <button onclick="activar_producto(this)" data-id="{{$producto->id}}" class="btn btn-success">Activar</button>
                         @endif</td>
                     <td><a href="{{route('productos.edit', $producto->id)}}" class="btn btn-primary">Modificar</a></td>
                 </tr>
