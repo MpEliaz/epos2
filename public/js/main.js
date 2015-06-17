@@ -8,10 +8,12 @@ function activar_producto(x)
         data: { id: x.dataset.id }
     })
         .success(function( msg ) {
-            console.log(msg);
             if(msg == true){
-                this.attr('onclick','desactivar_producto('+ x.dataset.id+')');
-                this.cdd
+                console.log(msg);
+                x.setAttribute('onclick','desactivar_producto(this)');
+                x.innerHTML = "Desactivar";
+                x.className = 'btn btn-danger';
+                console.log(x);
             }
         });
 
@@ -26,8 +28,14 @@ function desactivar_producto(x)
         data: { id: x.dataset.id }
     })
         .success(function( msg ) {
-            console.log(msg);
-            
+            if(msg == true) {
+                console.log(msg);
+                x.setAttribute('onclick', 'activar_producto(this)');
+                x.innerHTML = "Activar";
+                x.className = 'btn btn-success';
+                console.log(x);
+            }
+
         });
 
 }
