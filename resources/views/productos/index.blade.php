@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <a class="btn btn-default" href="{{url('productos/create')}}">Nuevo</a>
-        <span>Hay <strong>{{$productos->total()}}</strong> productos</span>
+        <span>Hay <strong>{{$productos->total()}}</strong> producto(s)</span>
 
               {!!Form::open(['route' => 'productos.index', 'method'=>'GET', 'class'=>'navbar-form navbar-right', 'role'=>'search'])!!}
                 <div class="form-group">
@@ -44,8 +44,8 @@
 	    			<td>{{$producto->precio_neto}}</td>
 	    			<td>{{$producto->precio_venta}}</td>
 	    			<td>{{$producto->stock}}</td>
-	    			<td> @if($producto->estado === 1)<button onclick="desactivar_producto(this)" data-id="{{$producto->id}}" class="btn btn-danger">Desactivar</button>
-                        @elseif ($producto->estado === 0)
+	    			<td> @if($producto->estado == 1)<button onclick="desactivar_producto(this)" data-id="{{$producto->id}}" class="btn btn-danger">Desactivar</button>
+                        @elseif ($producto->estado == 0)
                             <button onclick="activar_producto(this)" data-id="{{$producto->id}}" class="btn btn-success">Activar</button>
                         @endif</td>
                     <td><a href="{{route('productos.edit', $producto->id)}}" class="btn btn-primary">Modificar</a></td>

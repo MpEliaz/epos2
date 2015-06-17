@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <a class="btn btn-default" href="{{url('descuentos/create')}}">Nuevo</a>
-        <span>Hay <strong>{{$total}}</strong> productos</span>
+        <span>Hay <strong>{{$total}}</strong> descuento(s)</span>
 
               {!!Form::open(['route' => 'descuentos.index', 'method'=>'GET', 'class'=>'navbar-form navbar-right', 'role'=>'search'])!!}
                 <div class="form-group">
