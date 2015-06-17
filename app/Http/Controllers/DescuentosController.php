@@ -121,12 +121,12 @@ class DescuentosController extends Controller {
 
     public function get_desc()
     {
-        if(Request::ajax())
-        {
+      //  if(Request::ajax())
+     //   {
             $descuento = Request::get('cod_desc');
             $desc = Descuento::where('codigo_descuento','=',$descuento)->get();
             return response()->json($desc);
-        }
+      //  }
 
     }
 
