@@ -30,7 +30,7 @@ Route::resource('productos', 'ProductosController');
 Route::post('descuento/activar', 'DescuentosController@activar');
 Route::post('descuento/desactivar', 'DescuentosController@desactivar');
 Route::resource('descuentos', 'DescuentosController');
-
+Route::resource('marcas', 'MarcaController');
 Route::resource('ventas', 'VentasController');
 
 Route::post('desc_','DescuentosController@get_desc');

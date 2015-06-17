@@ -1,4 +1,4 @@
-    @extends('app')
+@extends('app')
 
 @section('content')
 <h2 class="text-center">Descuentos</h2><br>
